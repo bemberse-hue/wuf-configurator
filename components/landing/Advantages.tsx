@@ -28,7 +28,7 @@ const ADVANTAGES: Advantage[] = [
     alt: 'Tres pedestales WUF en distintos colores mate sobre concreto',
     kicker: 'Manufactura',
     title: 'Cada pieza se hace cuando la pides.',
-    body: 'Nada de bodegas ni stock excedente: imprimimos bajo pedido en Colombia, en polímero técnico PLA mate de origen vegetal, con el nombre de tu mascota grabado antes de despachar. 48 a 72 horas de taller.',
+    body: 'Nada de bodegas ni stock excedente: imprimimos bajo pedido en Colombia, en polímero técnico PLA de origen vegetal, con el nombre de tu mascota grabado antes de despachar. 48 a 72 horas de taller.',
   },
 ];
 
