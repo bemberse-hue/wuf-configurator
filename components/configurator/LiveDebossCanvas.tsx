@@ -127,10 +127,10 @@ export default function LiveDebossCanvas() {
           ctx.font = `bold ${fontSize}px ${FONT_FAMILY_STACK}`;
         }
 
-        const depth = Math.max(1.5, fontSize * 0.04);
+        const depth = Math.max(0.8, fontSize * 0.018);
 
         ctx.globalCompositeOperation = 'multiply';
-        ctx.filter = 'blur(0.6px)';
+        ctx.filter = 'blur(0.4px)';
         ctx.fillStyle = theme.shadow;
         ctx.fillText(name, depth * 0.55, depth * 1.1);
 
