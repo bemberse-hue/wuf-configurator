@@ -13,22 +13,19 @@ const COLOR_IMAGES: Record<BowlColor, string> = {
 };
 
 const TEXT_THEME: Record<BowlColor, { shadow: string, highlight: string, base: string }> = {
-  'crema': { shadow: '#B7AF9E', highlight: '#FFFFFF', base: '#8A8272' },
-  'oliva': { shadow: '#2E3226', highlight: '#D9E0C9', base: '#3F4336' },
-  'negro': { shadow: '#000000', highlight: '#6B6B6B', base: '#000000' },
-  'rosado': { shadow: '#9C4F52', highlight: '#FFE3E4', base: '#A85A5D' },
-  'lila': { shadow: '#7C5C99', highlight: '#F5EBFC', base: '#8A6B9E' },
+  'crema': { shadow: '#8F8672', highlight: '#FFFFFF', base: '#6B6355' },
+  'oliva': { shadow: '#20231A', highlight: '#DCE3CC', base: '#262A1F' },
+  'negro': { shadow: '#000000', highlight: '#7A7A7A', base: '#000000' },
+  'rosado': { shadow: '#7C3B3E', highlight: '#FFECEC', base: '#7A3F42' },
+  'lila': { shadow: '#5F4478', highlight: '#F7EFFC', base: '#5E4471' },
 };
 
-// Arial Rounded MT Bold es la fuente real del molde de grabado — se mantiene
-// como primera opción por fidelidad a la pieza física. Solo viene preinstalada
-// en macOS/iOS; en el resto de sistemas cae en Fredoka (cargada en layout.tsx
-// con nombre de familia literal), que conserva el mismo carácter redondeado
-// en vez de un sans-serif genérico silencioso.
 const FONT_FAMILY_STACK = '"Arial Rounded MT Bold", "Arial Rounded MT", "Fredoka", sans-serif';
-const SINGLE_MAX_FONT = 72;
-const DUO_MAX_FONT = 34;
-const MIN_FONT_SIZE = 20;
+const FONT_RATIO_SINGLE = 0.17;
+const FONT_RATIO_DUO = 0.085;
+const MAX_FONT_ABSOLUTE_SINGLE = 84;
+const MAX_FONT_ABSOLUTE_DUO = 44;
+const MIN_FONT_SIZE = 16;
 
 export default function LiveDebossCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -38,8 +35,6 @@ export default function LiveDebossCanvas() {
   const imageCache = useRef<Map<string, HTMLImageElement>>(new Map());
   const isDuo = size === 'duo-s';
 
-  // Confirma que la fuente de respaldo esté realmente disponible antes de
-  // grabar texto — evita el parpadeo de "sans-serif genérico -> fuente real"
   useEffect(() => {
     let cancelled = false;
     const fonts = typeof document !== 'undefined' ? document.fonts : null;
@@ -58,7 +53,6 @@ export default function LiveDebossCanvas() {
     return () => { cancelled = true; };
   }, []);
 
-  // Carga (y cachea) las imágenes que hagan falta: una si es Single, dos si es Dúo
   useEffect(() => {
     const neededColors = isDuo ? [color, colorSecondary] : [color];
     let cancelled = false;
@@ -93,10 +87,7 @@ export default function LiveDebossCanvas() {
       ctx.scale(dpr, dpr);
       ctx.clearRect(0, 0, rect.width, rect.height);
 
-      // Dibuja un plato (imagen + nombre grabado) centrado en centerX,
-      // ocupando como máximo areaWidth de ancho. Se reutiliza para el
-      // modo Single (un plato, ancho completo) y Dúo (dos platos, mitad c/u).
-      const drawBowl = (centerX: number, areaWidth: number, colorKey: BowlColor, name: string, maxFont: number, verticalOffsetFactor: number) => {
+      const drawBowl = (centerX: number, areaWidth: number, colorKey: BowlColor, name: string, fontRatio: number, maxFontAbsolute: number, verticalOffsetFactor: number) => {
         const img = getImg(colorKey);
         if (!img) return;
 
@@ -128,29 +119,28 @@ export default function LiveDebossCanvas() {
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
 
-        const maxTextWidth = drawWidth * 0.6;
-        let fontSize = maxFont;
+        const maxTextWidth = drawWidth * 0.3;
+        let fontSize = Math.min(drawWidth * fontRatio, maxFontAbsolute);
         ctx.font = `bold ${fontSize}px ${FONT_FAMILY_STACK}`;
         while (ctx.measureText(name).width > maxTextWidth && fontSize > MIN_FONT_SIZE) {
           fontSize -= 2;
           ctx.font = `bold ${fontSize}px ${FONT_FAMILY_STACK}`;
         }
 
-        const depth = Math.max(1.5, fontSize * 0.035);
+        const depth = Math.max(1.5, fontSize * 0.04);
 
-        // Hendidura: oscurece el material real debajo del trazo
         ctx.globalCompositeOperation = 'multiply';
+        ctx.filter = 'blur(0.6px)';
         ctx.fillStyle = theme.shadow;
-        ctx.fillText(name, depth * 0.5, depth);
+        ctx.fillText(name, depth * 0.55, depth * 1.1);
 
-        // Filo de luz en el borde opuesto del relieve
         ctx.globalCompositeOperation = 'screen';
         ctx.fillStyle = theme.highlight;
-        ctx.fillText(name, -depth * 0.5, -depth * 0.6);
+        ctx.fillText(name, -depth * 0.55, -depth * 0.7);
+        ctx.filter = 'none';
 
-        // Cuerpo del trazo, semitransparente para que siga leyendo el material
         ctx.globalCompositeOperation = 'source-over';
-        ctx.globalAlpha = 0.5;
+        ctx.globalAlpha = 0.82;
         ctx.fillStyle = theme.base;
         ctx.fillText(name, 0, 0);
         ctx.globalAlpha = 1;
@@ -159,10 +149,9 @@ export default function LiveDebossCanvas() {
       };
 
       if (isDuo) {
-        drawBowl(rect.width * 0.27, rect.width * 0.46, color, customName, DUO_MAX_FONT, 0.04);
-        drawBowl(rect.width * 0.73, rect.width * 0.46, colorSecondary, customName, DUO_MAX_FONT, 0.04);
+        drawBowl(rect.width * 0.27, rect.width * 0.46, color, customName, FONT_RATIO_DUO, MAX_FONT_ABSOLUTE_DUO, 0.05);
+        drawBowl(rect.width * 0.73, rect.width * 0.46, colorSecondary, customName, FONT_RATIO_DUO, MAX_FONT_ABSOLUTE_DUO, 0.05);
 
-        // Línea divisoria sutil — referencia al mismo lenguaje de "coursing" del landing
         ctx.save();
         ctx.strokeStyle = 'rgba(20,19,15,0.08)';
         ctx.lineWidth = 1;
@@ -172,7 +161,7 @@ export default function LiveDebossCanvas() {
         ctx.stroke();
         ctx.restore();
       } else {
-        drawBowl(rect.width / 2, rect.width, color, customName, SINGLE_MAX_FONT, 0.05);
+        drawBowl(rect.width / 2, rect.width, color, customName, FONT_RATIO_SINGLE, MAX_FONT_ABSOLUTE_SINGLE, 0.05);
       }
     };
 
