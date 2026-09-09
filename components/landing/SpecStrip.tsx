@@ -1,6 +1,6 @@
 const SPECS = [
   { value: '16.0', unit: 'CM', label: 'Diámetro de base' },
-  { value: '400', unit: 'ML', label: 'Capacidad del inserto' },
+  { value: '400', unit: 'ML', label: 'Capacidad del plato' },
   { value: 'INOX', unit: '', label: 'Acero inoxidable, no poroso' },
   { value: '48–72', unit: 'H', label: 'Fabricación bajo pedido' },
 ];

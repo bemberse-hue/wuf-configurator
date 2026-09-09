@@ -12,12 +12,12 @@ const COLOR_IMAGES: Record<BowlColor, string> = {
   'lila': '/renders/lila.png',
 };
 
-const TEXT_THEME: Record<BowlColor, { shadow: string, highlight: string, base: string }> = {
-  'crema': { shadow: '#8F8672', highlight: '#FFFFFF', base: '#6B6355' },
-  'oliva': { shadow: '#20231A', highlight: '#DCE3CC', base: '#262A1F' },
-  'negro': { shadow: '#000000', highlight: '#7A7A7A', base: '#000000' },
-  'rosado': { shadow: '#7C3B3E', highlight: '#FFECEC', base: '#7A3F42' },
-  'lila': { shadow: '#5F4478', highlight: '#F7EFFC', base: '#5E4471' },
+const TEXT_THEME: Record<BowlColor, { shadow: string, highlight: string, base: string, baseAlpha?: number }> = {
+  'crema': { shadow: '#B8AF9E', highlight: '#FFFFFF', base: '#998F7D', baseAlpha: 0.72 },
+  'oliva': { shadow: '#20231A', highlight: '#DCE3CC', base: '#262A1F', baseAlpha: 0.82 },
+  'negro': { shadow: '#000000', highlight: '#7A7A7A', base: '#000000', baseAlpha: 0.85 },
+  'rosado': { shadow: '#7C3B3E', highlight: '#FFECEC', base: '#7A3F42', baseAlpha: 0.82 },
+  'lila': { shadow: '#5F4478', highlight: '#F7EFFC', base: '#5E4471', baseAlpha: 0.82 },
 };
 
 const FONT_FAMILY_STACK = '"Arial Rounded MT Bold", "Arial Rounded MT", "Fredoka", sans-serif';
@@ -129,20 +129,67 @@ export default function LiveDebossCanvas() {
 
         const depth = Math.max(0.8, fontSize * 0.018);
 
+        const chars = Array.from(name);
+        const charWidths = chars.map((c) => ctx.measureText(c).width);
+        const totalTextWidth = charWidths.reduce((acc, w) => acc + w, 0);
+
+        // Curvatura cilíndrica suave acompañando el anillo curvo del pedestal
+        const halfWidth = totalTextWidth / 2;
+        const sagitta = chars.length > 1 ? Math.min(5.5, Math.max(0.8, totalTextWidth * 0.026)) : 0;
+
+        let currentX = -halfWidth;
+        const charData = chars.map((char, i) => {
+          const w = charWidths[i];
+          const cx = currentX + w / 2;
+          currentX += w;
+
+          if (chars.length <= 1 || halfWidth === 0) {
+            return { char, cx: 0, cy: 0, rot: 0 };
+          }
+
+          const normX = cx / halfWidth;
+          const cy = -sagitta * (normX * normX - 0.5);
+          const slope = (-2 * sagitta * cx) / (halfWidth * halfWidth);
+          const rot = Math.atan(slope);
+
+          return { char, cx, cy, rot };
+        });
+
+        // 1. Sombra bajo relieve (Multiply)
         ctx.globalCompositeOperation = 'multiply';
         ctx.filter = 'blur(0.4px)';
         ctx.fillStyle = theme.shadow;
-        ctx.fillText(name, depth * 0.55, depth * 1.1);
+        for (const item of charData) {
+          ctx.save();
+          ctx.translate(item.cx + depth * 0.55, item.cy + depth * 1.1);
+          ctx.rotate(item.rot);
+          ctx.fillText(item.char, 0, 0);
+          ctx.restore();
+        }
 
+        // 2. Resalte superior biselado (Screen)
         ctx.globalCompositeOperation = 'screen';
-        ctx.fillStyle = theme.highlight;
-        ctx.fillText(name, -depth * 0.55, -depth * 0.7);
         ctx.filter = 'none';
+        ctx.fillStyle = theme.highlight;
+        for (const item of charData) {
+          ctx.save();
+          ctx.translate(item.cx - depth * 0.55, item.cy - depth * 0.7);
+          ctx.rotate(item.rot);
+          ctx.fillText(item.char, 0, 0);
+          ctx.restore();
+        }
 
+        // 3. Tono base grabado (Source-over)
         ctx.globalCompositeOperation = 'source-over';
-        ctx.globalAlpha = 0.82;
+        ctx.globalAlpha = theme.baseAlpha ?? 0.82;
         ctx.fillStyle = theme.base;
-        ctx.fillText(name, 0, 0);
+        for (const item of charData) {
+          ctx.save();
+          ctx.translate(item.cx, item.cy);
+          ctx.rotate(item.rot);
+          ctx.fillText(item.char, 0, 0);
+          ctx.restore();
+        }
         ctx.globalAlpha = 1;
 
         ctx.restore();

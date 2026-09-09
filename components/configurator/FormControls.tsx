@@ -43,8 +43,8 @@ export default function FormControls() {
   const isDuo = store.size === 'duo-s';
 
   const SIZES: { id: BowlSize; label: string; desc: string; price: number }[] = [
-    { id: 'single-s', label: 'Single S', desc: '1 Pedestal + 1 Inserto Inox', price: PRICES['single-s'] },
-    { id: 'duo-s', label: 'Set Dúo S', desc: '2 Pedestales + 2 Insertos Inox', price: PRICES['duo-s'] },
+    { id: 'single-s', label: 'Sencillo S', desc: '1 Pedestal + 1 Plato Inox', price: PRICES['single-s'] },
+    { id: 'duo-s', label: 'Doble S', desc: '2 Pedestales + 2 Platos Inox', price: PRICES['duo-s'] },
   ];
 
   const formatPrice = (price: number) =>

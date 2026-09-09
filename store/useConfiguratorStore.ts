@@ -12,7 +12,7 @@ export const PRICES: Record<BowlSize, number> = {
 
 interface ConfiguratorState {
   size: BowlSize;
-  color: BowlColor;           // Color del plato único (Single S) o del Plato 1 (Set Dúo)
+  color: BowlColor;           // Color del plato único (Sencillo S) o del Plato 1 (Doble S)
   colorSecondary: BowlColor;  // Color del Plato 2 — solo aplica si size === 'duo-s'
   customName: string;         // Mismo nombre para ambos platos (es la misma mascota: comida + agua)
   basePrice: number;

@@ -2,8 +2,8 @@ import { z } from 'zod';
 
 export const orderSchema = z.object({
   config: z.object({
-    size: z.enum(['S', 'M']),
-    color: z.enum(['crema', 'oliva', 'negro', 'rosado']),
+    size: z.enum(['single-s', 'duo-s', 'S', 'M']),
+    color: z.enum(['crema', 'oliva', 'negro', 'rosado', 'lila']),
     customName: z
       .string()
       .max(10, 'El nombre no puede exceder los 10 caracteres')

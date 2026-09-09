@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Roboto, Big_Shoulders } from "next/font/google";
+import JsonLd from "@/components/seo/JsonLd";
 import "./globals.css";
 
 // Cuerpo de texto: funcional, técnico
@@ -21,9 +22,76 @@ const bigShoulders = Big_Shoulders({
   fallback: ['Arial Narrow', 'Arial', 'sans-serif'],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://wuf.com.co';
+
 export const metadata: Metadata = {
-  title: 'WUF | Comederos Esculturales para Mascotas',
-  description: 'Comederos elevados de diseño arquitectónico, personalizados y fabricados bajo pedido en Colombia.',
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: 'WUF | Comederos Elevados y Ergonómicos para Mascotas',
+    template: '%s | WUF Architectural Pet Living',
+  },
+  description:
+    'Comederos elevados de 10 cm con diseño arquitectónico y plato de acero inoxidable. Personalizados bajo pedido en Colombia para gatos y perros pequeños. Alivia la columna, previene reflujo y acné en barbilla.',
+  keywords: [
+    'comedero elevado',
+    'comedero ergonomico perro',
+    'comedero para gatos elevado',
+    'plato acero inoxidable mascotas',
+    'comedero personalizado perro',
+    'diseño arquitectonico mascotas',
+    'WUF',
+    'wuf gadgets',
+    'prevenir acne felino barbilla',
+    'comederos perros colombia bogota medellin cali',
+    'pedestal comedero mascota',
+  ],
+  authors: [{ name: 'WUF' }],
+  creator: 'WUF',
+  publisher: 'WUF',
+  formatDetection: {
+    telephone: true,
+    email: false,
+    address: false,
+  },
+  openGraph: {
+    title: 'WUF | Comederos Elevados y Ergonómicos para Mascotas',
+    description:
+      'Eleva la postura de tu mascota 10 cm. Diseño arquitectónico en polímero vegetal y plato de acero inoxidable higiénico, personalizado con su nombre en Colombia.',
+    url: siteUrl,
+    siteName: 'WUF',
+    images: [
+      {
+        url: '/galeria/inicio1.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Comedero WUF Elevado y Ergonómico',
+      },
+    ],
+    locale: 'es_CO',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'WUF | Comederos Elevados y Ergonómicos para Mascotas',
+    description:
+      'Comederos elevados de 10 cm con plato de acero inoxidable y nombre personalizado. Diseñado y fabricado en Colombia.',
+    images: ['/galeria/inicio1.jpg'],
+    creator: '@wuf_gadgets',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: siteUrl,
+  },
 };
 
 // Declarado explícito: al agregar un <head> manual para la fuente del grabado
@@ -56,6 +124,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&display=swap" rel="stylesheet" />
       </head>
       <body className={`${roboto.variable} ${bigShoulders.variable} font-sans antialiased bg-paper text-ink overflow-x-hidden`}>
+        <JsonLd />
         {children}
       </body>
     </html>

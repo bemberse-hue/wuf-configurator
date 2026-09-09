@@ -13,14 +13,14 @@ const ADVANTAGES: Advantage[] = [
     alt: 'Perro sentado junto a comedero WUF oliva en sala de estar',
     kicker: 'Postura',
     title: 'La altura correcta cambia cómo comen.',
-    body: 'A ras de piso, el cuello se dobla 70° y comprime el esófago. Los 12 cm de WUF alinean columna y estómago: menos aire tragado, menos regurgitación, mejor tránsito digestivo. Pensado para gatos y perros pequeños hasta 12 kg.',
+    body: 'A ras de piso, el cuello se dobla 70° y comprime el esófago. Los 10 cm de WUF alinean columna y estómago: menos aire tragado, menos regurgitación, mejor tránsito digestivo. Pensado para gatos y perros pequeños hasta 12 kg.',
   },
   {
     image: '/galeria/foto3.jpg',
     alt: 'Detalle macro del grabado del nombre en el pedestal WUF',
     kicker: 'Higiene',
     title: 'El acero no negocia con las bacterias.',
-    body: 'El inserto es de acero inoxidable de alta densidad: no poroso, no absorbe olores ni sabores, apto para lavavajillas y agua hirviendo. Nada de plástico rayado acumulando acné en la barbilla.',
+    body: 'El plato es de acero inoxidable de alta densidad: no poroso, no absorbe olores ni sabores, apto para lavavajillas y agua hirviendo. Nada de plástico rayado acumulando acné en la barbilla.',
     reverse: true,
   },
   {

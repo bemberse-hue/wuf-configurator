@@ -9,12 +9,13 @@ import ProductInfo from '@/components/configurator/ProductInfo';
 import SpecStrip from '@/components/landing/SpecStrip';
 import Advantages from '@/components/landing/Advantages';
 import ConfiguratorGallery from '@/components/configurator/ConfiguratorGallery';
+import Footer from '@/components/landing/Footer';
 import { useConfiguratorStore, PRICES } from '@/store/useConfiguratorStore';
 
 export default function AppFlow() {
   const [isConfiguring, setIsConfiguring] = useState(false);
   const configSize = useConfiguratorStore((s) => s.size);
-  const formControlsTitle = configSize === 'duo-s' ? 'Set Dúo S' : 'Single S';
+  const formControlsTitle = configSize === 'duo-s' ? 'Doble S' : 'Sencillo S';
 
   // El botón podía quedar clickeado a mitad de la landing (ej. desde el CTA
   // oscuro al final) y el configurador se abría con el scroll todavía abajo.
@@ -92,7 +93,7 @@ export default function AppFlow() {
               {/* INTRO EDITORIAL */}
               <div className="w-full max-w-7xl mx-auto px-6 md:px-12 py-20 md:py-28">
                 <p className="font-display font-medium text-2xl md:text-4xl lg:text-[2.75rem] leading-[1.2] tracking-tight max-w-4xl">
-                  Un comedero a ras de piso obliga al cuello a doblarse. WUF eleva a tu mascota 12 centímetros y trata su postura con el mismo rigor que un mueble de arquitecto.
+                  Un comedero a ras de piso obliga al cuello a doblarse. WUF eleva a tu mascota 10 centímetros y trata su postura con el mismo rigor que un mueble de arquitecto.
                 </p>
               </div>
 
@@ -175,18 +176,8 @@ export default function AppFlow() {
         <ConfiguratorGallery />
       )}
 
-      {/* FOOTER MANIFIESTO */}
-      <footer className="w-full border-t border-ink/10 py-12 px-6 bg-white mt-auto">
-        <div className="max-w-3xl mx-auto text-center flex flex-col items-center gap-4">
-          <h4 className="font-display font-bold text-lg tracking-tight uppercase">WUF / Architectural Pet Living</h4>
-          <p className="text-sm font-light text-gray-500 leading-relaxed">
-            Creemos que los objetos para nuestras mascotas merecen el mismo rigor formal, material y estético que el resto de los muebles de nuestra casa. Sin plásticos ruidosos, sin gráficos infantiles. Solo geometría, función y respeto por el espacio.
-          </p>
-          <div className="text-[9px] font-bold text-gray-300 uppercase tracking-widest mt-6">
-            © {new Date().getFullYear()} WUF. Todos los derechos reservados.
-          </div>
-        </div>
-      </footer>
+      {/* FOOTER MODERNO CON CONFIANZA Y CONTACTO */}
+      <Footer />
 
     </main>
   );

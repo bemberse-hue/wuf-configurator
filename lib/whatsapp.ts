@@ -19,7 +19,7 @@ export const generateWhatsAppLink = (orderId: string, config: WufConfigState): s
     }).format(price);
   };
 
-  const sizeLabel = config.size === 'single-s' ? 'Single S' : 'Set Dúo S';
+  const sizeLabel = config.size === 'single-s' ? 'Sencillo S' : 'Doble S';
   const isDuo = config.size === 'duo-s' && config.colorSecondary;
 
   const colorLine = isDuo

@@ -43,8 +43,8 @@ export default function ProductInfo() {
         </summary>
         <div className="py-4 text-sm font-light text-ink/60 leading-relaxed">
           <ul className="space-y-3">
-            <li className="grid grid-cols-3 gap-4 border-b border-ink/5 pb-2"><strong className="col-span-1 font-bold text-xs uppercase text-ink/90">Dimensiones</strong><span className="col-span-2">Diámetro base: 16.0 cm | Altura total: 12.0 cm</span></li>
-            <li className="grid grid-cols-3 gap-4 border-b border-ink/5 pb-2"><strong className="col-span-1 font-bold text-xs uppercase text-ink/90">Inserto</strong><span className="col-span-2">Acero Inox. Ø 16.0 cm ext. (Profundidad: 4.5 cm)</span></li>
+            <li className="grid grid-cols-3 gap-4 border-b border-ink/5 pb-2"><strong className="col-span-1 font-bold text-xs uppercase text-ink/90">Dimensiones</strong><span className="col-span-2">Diámetro base: 16.0 cm | Altura total: 10.0 cm</span></li>
+            <li className="grid grid-cols-3 gap-4 border-b border-ink/5 pb-2"><strong className="col-span-1 font-bold text-xs uppercase text-ink/90">Plato</strong><span className="col-span-2">Acero Inox. Ø 16.0 cm ext. (Profundidad: 4.5 cm)</span></li>
             <li className="grid grid-cols-3 gap-4 border-b border-ink/5 pb-2"><strong className="col-span-1 font-bold text-xs uppercase text-ink/90">Capacidad</strong><span className="col-span-2">400 ml (Equivalente a 1.5 tazas de concentrado o agua fresca)</span></li>
             <li className="grid grid-cols-3 gap-4 border-b border-ink/5 pb-2"><strong className="col-span-1 font-bold text-xs uppercase text-ink/90">Estructura</strong><span className="col-span-2">Polímero técnico PLA  de origen vegetal de alta densidad</span></li>
             <li className="grid grid-cols-3 gap-4 border-b border-ink/5 pb-2"><strong className="col-span-1 font-bold text-xs uppercase text-ink/90">Peso en seco</strong><span className="col-span-2">~320g (Centro de gravedad bajo para evitar vuelcos)</span></li>
@@ -63,7 +63,7 @@ export default function ProductInfo() {
         </summary>
         <div className="py-4 text-sm font-light text-ink/60 leading-relaxed space-y-4">
           <p>
-            Los comederos a nivel de suelo fuerzan a los animales a inclinar el cuello en un ángulo antinatural de 70°, comprimiendo el esófago y aumentando la ingesta de aire. La elevación de 12 cm de WUF alinea la columna cervical con el estómago, facilitando el tránsito digestivo y reduciendo el reflujo.
+            Los comederos a nivel de suelo fuerzan a los animales a inclinar el cuello en un ángulo antinatural de 70°, comprimiendo el esófago y aumentando la ingesta de aire. La elevación de 10 cm de WUF alinea la columna cervical con el estómago, facilitando el tránsito digestivo y reduciendo el reflujo.
           </p>
           <div>
             <strong className="block font-bold text-xs uppercase text-ink/90 mb-1">Compatibilidad (Talla S)</strong>
@@ -83,7 +83,7 @@ export default function ProductInfo() {
         </summary>
         <div className="py-4 text-sm font-light text-ink/60 leading-relaxed space-y-4">
           <div>
-            <strong className="block font-bold text-xs uppercase text-ink/90 mb-1">El Inserto de Acero Inoxidable</strong>
+            <strong className="block font-bold text-xs uppercase text-ink/90 mb-1">El Plato de Acero Inoxidable</strong>
             <ul className="list-disc pl-4 space-y-1">
               <li>100% Apto para lavavajillas y lavado con agua hirviendo.</li>
               <li>Material no poroso: previene colonias bacterianas que causan acné (puntos negros en barbilla) y alergias.</li>
