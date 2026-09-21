@@ -43,8 +43,8 @@ export default function FormControls() {
   const isDuo = store.size === 'duo-s';
 
   const SIZES: { id: BowlSize; label: string; desc: string; price: number }[] = [
-    { id: 'single-s', label: 'Sencillo S', desc: '1 Pedestal + 1 Plato Inox', price: PRICES['single-s'] },
-    { id: 'duo-s', label: 'Doble S', desc: '2 Pedestales + 2 Platos Inox', price: PRICES['duo-s'] },
+    { id: 'single-s', label: '1 Comedero', desc: '1 Pedestal + 1 Plato Inox', price: PRICES['single-s'] },
+    { id: 'duo-s', label: 'Set Dúo', desc: '2 Pedestales + 2 Platos Inox', price: PRICES['duo-s'] },
   ];
 
   const formatPrice = (price: number) =>
@@ -71,17 +71,27 @@ export default function FormControls() {
             >
               <div className="flex items-baseline justify-between gap-2">
                 <div className="font-bold text-sm">{s.label}</div>
-                <div className="font-display font-bold text-base tabular-nums">{formatPrice(s.price)}</div>
+                <div className="flex items-baseline gap-1.5">
+                  {s.id === 'duo-s' && (
+                    <span className="text-xs text-ink/35 line-through tabular-nums">
+                      {formatPrice(s.price * 2)}
+                    </span>
+                  )}
+                  <div className="font-display font-bold text-base tabular-nums">{formatPrice(s.price)}</div>
+                </div>
               </div>
               <div className="text-[11px] text-ink/50 mt-1">{s.desc}</div>
               {s.id === 'duo-s' && (
-                <div className="text-[10px] font-bold text-oliva-dark mt-2 bg-oliva/10 w-fit px-2 py-0.5 rounded-full">
-                  Ahorra {formatPrice(duoSavings)}
+                <div className="text-[10px] font-black uppercase tracking-wide text-oliva-dark mt-2 bg-oliva/10 w-fit px-2 py-0.5 rounded-full">
+                  Ahorras {formatPrice(duoSavings)}
                 </div>
               )}
             </button>
           ))}
         </div>
+        <p className="text-[11px] text-ink/40 mt-3">
+          Envío calculado por WhatsApp según tu ciudad.
+        </p>
       </div>
 
       <div>
@@ -119,6 +129,9 @@ export default function FormControls() {
             {charsLeft} car.
           </span>
         </div>
+        <p className="text-[11px] text-ink/50 leading-relaxed mb-4">
+          Cero stickers. Cero tintas que se borran con el agua. El nombre de tu perro queda modelado en bajo relieve.
+        </p>
         <input
           type="text"
           maxLength={10}

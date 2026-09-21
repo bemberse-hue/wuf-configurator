@@ -38,6 +38,16 @@ export default function AppFlow() {
         >
           WUF.
         </h1>
+        <span
+          className={`hidden sm:inline-flex items-center gap-2 absolute right-6 md:right-12 text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border transition-colors ${
+            isConfiguring
+              ? 'text-ink/70 border-ink/15 bg-ink/5'
+              : 'text-white/90 border-white/20 bg-white/10 backdrop-blur-sm'
+          }`}
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-oliva animate-pulse shrink-0" />
+          Batch 01 · Unidades limitadas
+        </span>
       </header>
 
       <div className="flex-grow">

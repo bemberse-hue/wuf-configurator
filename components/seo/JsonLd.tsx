@@ -1,4 +1,5 @@
 import { asset } from '@/lib/media';
+import { PRICES } from '@/store/useConfiguratorStore';
 
 export default function JsonLd() {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://wuf.com.co';
@@ -24,14 +25,14 @@ export default function JsonLd() {
     offers: {
       '@type': 'AggregateOffer',
       priceCurrency: 'COP',
-      lowPrice: 120000,
-      highPrice: 180000,
+      lowPrice: PRICES['single-s'],
+      highPrice: PRICES['duo-s'],
       offerCount: 2,
       offers: [
         {
           '@type': 'Offer',
           name: 'WUF Sencillo S',
-          price: 120000,
+          price: PRICES['single-s'],
           priceCurrency: 'COP',
           availability: 'https://schema.org/InStock',
           itemCondition: 'https://schema.org/NewCondition',
@@ -41,7 +42,7 @@ export default function JsonLd() {
         {
           '@type': 'Offer',
           name: 'WUF Doble S',
-          price: 180000,
+          price: PRICES['duo-s'],
           priceCurrency: 'COP',
           availability: 'https://schema.org/InStock',
           itemCondition: 'https://schema.org/NewCondition',

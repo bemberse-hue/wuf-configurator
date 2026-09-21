@@ -6,8 +6,8 @@ export type BowlColor = 'crema' | 'oliva' | 'negro' | 'rosado' | 'lila';
 // Única fuente de verdad para los precios — FormControls y el sticky bar
 // leen de aquí, así nunca quedan desincronizados entre sí.
 export const PRICES: Record<BowlSize, number> = {
-  'single-s': 120000,
-  'duo-s': 180000,
+  'single-s': 89000,
+  'duo-s': 159000,
 };
 
 interface ConfiguratorState {
