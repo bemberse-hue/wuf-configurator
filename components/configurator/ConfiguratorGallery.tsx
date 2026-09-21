@@ -12,19 +12,10 @@ const COLORS: { id: BowlColor; hex: string; label: string; render: string }[] = 
   { id: 'lila', hex: '#D4C4D7', label: 'Lila', render: '/renders/lila.png' },
 ];
 
-const PROOF: { image: string; alt: string; kicker: string; caption: string }[] = [
-  {
-    image: '/galeria/Dog_eating_from_bowl_2K_20260920212650.jpeg',
-    alt: 'Perro comiendo de cerca de un comedero WUF crema con el nombre Daiky grabado',
-    kicker: 'Grabado real',
-    caption: '“DAIKY”, grabado en bajo relieve directo en el pedestal. Nada de calcomanías que se despegan.',
-  },
-  {
-    image: '/galeria/Pet_bowls_studio_photography_2K_20260920212706.jpeg',
-    alt: 'Dos comederos WUF, uno oliva grabado con el nombre Max y otro crema grabado con Daiky',
-    kicker: 'Formato Doble S',
-    caption: 'Dos mascotas, dos nombres. Cada plato del set Doble S se graba por separado.',
-  },
+const PROOF: { image: string; alt: string }[] = [
+  { image: '/galeria/galeria-1.jpg', alt: 'Gato comiendo de un comedero WUF con el nombre de su dueño grabado' },
+  { image: '/galeria/galeria-2.jpg', alt: 'Dos comederos WUF de colores distintos, cada uno con un nombre grabado' },
+  { image: '/galeria/galeria-3.jpg', alt: 'Perro comiendo de cerca de un comedero WUF con el nombre de su dueño grabado' },
 ];
 
 export default function ConfiguratorGallery() {
@@ -39,33 +30,20 @@ export default function ConfiguratorGallery() {
       {/* Prueba de personalización — refuerza la decisión de compra justo antes
           de elegir color, mostrando el grabado real sobre piezas entregadas. */}
       <div className="max-w-7xl mx-auto px-6 md:px-12 pt-4 pb-16">
-        <span className="text-[11px] font-bold uppercase tracking-wide text-oliva">
-          Antes de elegir color
-        </span>
-        <h3 className="font-display font-bold text-2xl md:text-3xl tracking-tight mt-2 mb-8 max-w-xl">
-          Así se ve el nombre grabado en la pieza real
+        <h3 className="font-display font-bold text-2xl md:text-3xl tracking-tight mb-8 max-w-xl">
+          Así se ve el nombre de tu mascota…
         </h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
           {PROOF.map((p) => (
-            <figure key={p.image} className="group">
-              <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gray-200">
-                <Image
-                  src={asset(p.image)}
-                  alt={p.alt}
-                  fill
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                />
-              </div>
-              <figcaption className="mt-3">
-                <span className="text-[11px] font-bold uppercase tracking-wide text-ink/40">
-                  {p.kicker}
-                </span>
-                <p className="text-sm text-ink/70 font-light leading-relaxed mt-1">
-                  {p.caption}
-                </p>
-              </figcaption>
-            </figure>
+            <div key={p.image} className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gray-200 group">
+              <Image
+                src={asset(p.image)}
+                alt={p.alt}
+                fill
+                sizes="(min-width: 768px) 33vw, 100vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              />
+            </div>
           ))}
         </div>
       </div>

@@ -7,7 +7,7 @@
  * ?v=ASSET_VERSION. Sube ASSET_VERSION cada vez que reemplaces un archivo
  * existente por otro con el mismo nombre.
  */
-export const ASSET_VERSION = '2';
+export const ASSET_VERSION = '3';
 
 export function asset(path: string): string {
   return `${path}?v=${ASSET_VERSION}`;
