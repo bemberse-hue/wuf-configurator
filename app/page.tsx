@@ -169,10 +169,10 @@ export default function AppFlow() {
                   </h2>
                   <p className="text-sm text-ink/50 font-light mb-8">El comedero elevado de diseño arquitectónico.</p>
                   <FormControls />
-                  <ProductInfo />
-                  <div className="mt-auto pt-8">
+                  <div className="pt-8">
                     <StickyCheckoutBar />
                   </div>
+                  <ProductInfo />
                 </div>
 
               </div>
