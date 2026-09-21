@@ -74,7 +74,7 @@ export default function FormControls() {
                 <div className="flex items-baseline gap-1.5">
                   {s.id === 'duo-s' && (
                     <span className="text-xs text-ink/35 line-through tabular-nums">
-                      {formatPrice(s.price * 2)}
+                      {formatPrice(SIZES[0].price * 2)}
                     </span>
                   )}
                   <div className="font-display font-bold text-base tabular-nums">{formatPrice(s.price)}</div>
