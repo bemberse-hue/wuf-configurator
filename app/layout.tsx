@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Roboto, Big_Shoulders } from "next/font/google";
 import JsonLd from "@/components/seo/JsonLd";
+import { asset } from "@/lib/media";
 import "./globals.css";
 
 // Cuerpo de texto: funcional, técnico
@@ -61,7 +62,7 @@ export const metadata: Metadata = {
     siteName: 'WUF',
     images: [
       {
-        url: '/galeria/inicio1.jpg',
+        url: asset('/galeria/inicio1.jpg'),
         width: 1200,
         height: 630,
         alt: 'Comedero WUF Elevado y Ergonómico',
@@ -75,7 +76,7 @@ export const metadata: Metadata = {
     title: 'WUF | Comederos Elevados y Ergonómicos para Mascotas',
     description:
       'Comederos elevados de 10 cm con plato de acero inoxidable y nombre personalizado. Diseñado y fabricado en Colombia.',
-    images: ['/galeria/inicio1.jpg'],
+    images: [asset('/galeria/inicio1.jpg')],
     creator: '@wuf_gadgets',
   },
   robots: {

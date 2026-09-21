@@ -1,3 +1,5 @@
+import { asset } from '@/lib/media';
+
 export default function JsonLd() {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://wuf.com.co';
 
@@ -6,10 +8,10 @@ export default function JsonLd() {
     '@type': 'Product',
     name: 'WUF - Comedero Elevado Ergonómico para Mascotas',
     image: [
-      `${baseUrl}/galeria/inicio1.jpg`,
-      `${baseUrl}/renders/crema.png`,
-      `${baseUrl}/renders/oliva.png`,
-      `${baseUrl}/renders/negro.png`,
+      `${baseUrl}${asset('/galeria/inicio1.jpg')}`,
+      `${baseUrl}${asset('/renders/crema.png')}`,
+      `${baseUrl}${asset('/renders/oliva.png')}`,
+      `${baseUrl}${asset('/renders/negro.png')}`,
     ],
     description:
       'Comedero elevado de 10 cm de diseño arquitectónico con plato de acero inoxidable de 400 ml. Fabricado en polímero técnico PLA vegetal y personalizado bajo pedido en bajo relieve con el nombre de tu mascota. Alivia la columna cervical, previene reflujo y acné en barbilla.',
@@ -64,7 +66,7 @@ export default function JsonLd() {
     name: 'WUF',
     alternateName: 'WUF Architectural Pet Living',
     url: baseUrl,
-    logo: `${baseUrl}/renders/crema.png`,
+    logo: `${baseUrl}${asset('/renders/crema.png')}`,
     sameAs: [
       'https://instagram.com/wuf_gadgets',
       'https://tiktok.com/@wuf_gadgets',

@@ -1,3 +1,6 @@
+import Image from 'next/image';
+import { asset } from '@/lib/media';
+
 interface Advantage {
   image: string;
   alt: string;
@@ -40,12 +43,15 @@ export default function Advantages() {
           key={item.title}
           className={`w-full flex flex-col ${item.reverse ? 'md:flex-row-reverse' : 'md:flex-row'}`}
         >
-          <div
-            className="w-full md:w-3/5 aspect-[4/3] md:aspect-auto md:min-h-[560px] bg-gray-200 bg-cover bg-center"
-            style={{ backgroundImage: `url('${item.image}')` }}
-            role="img"
-            aria-label={item.alt}
-          />
+          <div className="relative w-full md:w-3/5 aspect-[4/3] md:aspect-auto md:min-h-[560px] bg-gray-200 overflow-hidden">
+            <Image
+              src={asset(item.image)}
+              alt={item.alt}
+              fill
+              sizes="(min-width: 768px) 60vw, 100vw"
+              className="object-cover"
+            />
+          </div>
           <div className="w-full md:w-2/5 flex items-center px-6 py-14 md:px-16 md:py-0">
             <div className="max-w-md">
               <span className="text-[11px] font-bold uppercase tracking-wide text-oliva">

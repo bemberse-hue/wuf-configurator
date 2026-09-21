@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import LiveDebossCanvas from '@/components/configurator/LiveDebossCanvas';
 import FormControls from '@/components/configurator/FormControls';
@@ -11,6 +12,7 @@ import Advantages from '@/components/landing/Advantages';
 import ConfiguratorGallery from '@/components/configurator/ConfiguratorGallery';
 import Footer from '@/components/landing/Footer';
 import { useConfiguratorStore, PRICES } from '@/store/useConfiguratorStore';
+import { asset } from '@/lib/media';
 
 export default function AppFlow() {
   const [isConfiguring, setIsConfiguring] = useState(false);
@@ -54,11 +56,13 @@ export default function AppFlow() {
             >
               {/* HERO A SANGRE COMPLETA */}
               <div className="relative w-full h-[92vh] min-h-[560px] bg-gray-300 overflow-hidden">
-                <div
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{ backgroundImage: "url('/galeria/inicio1.jpg')" }}
-                  role="img"
-                  aria-label="Perro Shih Tzu comiendo de un comedero WUF oliva junto a otros dos pedestales"
+                <Image
+                  src={asset('/galeria/inicio1.jpg')}
+                  alt="Perro peludo comiendo de un comedero WUF oliva con la placa de su nombre, Daiky, colgando del collar"
+                  fill
+                  priority
+                  sizes="100vw"
+                  className="object-cover"
                 />
                 {/* Scrim para legibilidad del texto, no decorativo */}
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/5 to-transparent" />
